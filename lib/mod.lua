@@ -1,7 +1,7 @@
 local mod = require 'core/mods'
 
 local state = {
-  exegesis = "apes together strong",
+  exegesis = "HECATOMB",
   version_major = 0,
   version_minor = 0,
   version_patch = 1,
@@ -12,33 +12,39 @@ local state = {
 
 
 
--- APE HOOKS
+-- HECATOMB HOOKS
 
-mod.hook.register("system_post_startup", "APETOOLS POST-STARTUP", function()
-  print("APETOOLS POST-STARTUP")
+mod.hook.register("system_post_startup", "HECATOMB POST-STARTUP", function()
+  print("HECATOMB POST-STARTUP")
+  pull_cci()
 end)
 
-mod.hook.register("system_pre_shutdown", "APETOOLS PRE-SHUTDOWN", function()
-  print("APETOOLS PRE-SHUTDOWN")
+mod.hook.register("system_pre_shutdown", "HECATOMB PRE-SHUTDOWN", function()
+  print("HECATOMB PRE-SHUTDOWN")
 end)
 
-mod.hook.register("script_pre_init", "APETOOLS PRE-INIT", function()
-  print("APETOOLS PRE-INIT")
+mod.hook.register("script_pre_init", "HECATOMB PRE-INIT", function()
+  print("HECATOMB PRE-INIT")
   state.last_script = norns.state.script
 end)
 
-mod.hook.register("script_post_cleanup", "APETOOLS POST-CLEANUP", function()
-  print("APETOOLS POST-CLEANUP")
+mod.hook.register("script_post_cleanup", "HECATOMB POST-CLEANUP", function()
+  print("HECATOMB POST-CLEANUP")
 end)
 
 
 
 
 
--- APE TOOLS
+-- HECATOMB TOOLS
+function pull_cci()
+  print("pulling cci from github...")
+  os.execute("cd /home/we/dust/code/cci/ && git pull https://github.com/northern-information/cci.git")
+  print("done.")
+end
 
 function screenshot()
-  _norns.screen_export_png("/home/we/dust/APETOOLS-screenshot-" .. os.time() .. ".png")
+  _norns.screen_export_png("/home/we/dust/HECATOMB-screenshot-" .. os.time() .. ".png")
 end
 
 function rerun(safe)
@@ -46,7 +52,7 @@ function rerun(safe)
   if script ~= nil and script ~= "" then
     norns.script.load(script)
   else
-    print("APETOOLS DID NOT FIND SCRIPT TO RELOAD!")
+    print("HECATOMB DID NOT FIND SCRIPT TO RELOAD!")
   end
 end
 
@@ -73,37 +79,37 @@ m.key = function(n, z)
 end
 
 m.enc = function(n, d)
-  print("APETOOLS ENCS UNUSED", n, d)
+  print("HECATOMB ENCS UNUSED", n, d)
   mod.menu.redraw()
 end
 
 m.redraw = function()
   screen.clear()
-  screen.move(64,32)
-  screen.text_center(state.exegesis)
-  screen.move(64,40)
-  screen.text_center("APETOOLS v" .. 
-                    state.version_major .. "." ..
-                    state.version_minor .. "." .. 
-                    state.version_patch)
+  screen.display_png("/home/we/dust/code/hecatomb/hecatomb.png", 0, 0)
+  screen.move(72,8)
+  screen.text("HECATOMB")
+  screen.move(72,16)
+  screen.text("v" .. state.version_major .. "." .. state.version_minor .. "." .. state.version_patch)
+  screen.move(72,24)
+  screen.text("CCI AUTO")
+  screen.move(72,32)
+  screen.text("UPDATES ON")
   screen.update()
 end
 
 m.init = function()
-  print("APETOOLS LOOK AT YOU SHOWING YOUR FACE AROUND HERE")
+  print("HECATOMB ONLINE.")
 end
 
 m.deinit = function()
-  print("APETOOLS KEEP THE CHANGE YA FILTHY ANIMAL")
+  print("HECATOMB OFFLINE.")
 end
 
 mod.menu.register(mod.this_name, m)
 
 
 
-
-
--- Ape, Private Investigator
+-- API
 
 local api = {}
 
