@@ -2,7 +2,6 @@
 
 ![HECATOMB](hecatomb.png)
 
-```
 HECATOMB: CAPTAIN, we are still working to get your norns/shield connected to the CCI's mycochain. Until AT field sync, I suggest you enable this mod to ensure continuous automatic downloads of [CCI](https://github.com/northern-information/cci). It will make for a more immersive experience.
 
 HECATOMB: We do not have an ETA on CCI v1.0.0 golden release. But I fear it may be measured in decades, perhaps even longer than the fabled "728.2 Year Dev Cycle of [Dwarf Fortress](https://bay12games.com/dwarves/)."
@@ -14,4 +13,3 @@ HECATOMB: It goes without saying this is experimental technology and unexpected 
 CAPTAIN: Thank you, HECATOMB. Dismissed.
 
 HECATOMB: Aye, CAPTAIN. I'll leave you to it.
-```
