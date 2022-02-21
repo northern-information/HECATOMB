@@ -1,6 +1,6 @@
 # HECATOMB
 
-![HECATOMB](hecatombpng)
+![HECATOMB](hecatomb.png)
 
 ```
 HECATOMB: CAPTAIN, we are still working to get your norns/shield connected to the CCI's mycochain. Until AT field sync, I suggest you enable this mod to ensure continuous automatic downloads of [CCI](https://github.com/northern-information/cci). It will make for a more immersive experience.
