@@ -1,11 +1,10 @@
 local mod = require 'core/mods'
 
+version = "0.0.2"
+
 local state = {
-  exegesis = "HECATOMB",
-  version_major = 0,
-  version_minor = 0,
-  version_patch = 1,
-  last_script = nil
+  last_script = nil,
+  flag = "..."
 }
 
 
@@ -57,24 +56,32 @@ function rerun(safe)
 end
 
 function run(script)
-  -- TODO: check whether exists first, maybe?
-  norns.script.load("/home/we/dust/code/"..script.."/"..script..".lua")
+  norns.script.load("/home/we/dust/code/" .. script .. "/" .. script .. ".lua")
 end
 
 function r(safe)
   rerun(safe)
 end
 
+function rage()
+  -- the "right" way to restart the whole stack
+  _norns.reset()
+end
 
 
-
--- NORNS SYSTEM MENU
+-- HECATOMB SYSTEM MENU
 
 local m = {}
 
 m.key = function(n, z)
-  if n == 2 and z == 1 then
-    mod.menu.exit()
+  if z == 0 then return end
+  if n == 2 then mod.menu.exit() end
+  if n == 3 then
+    state.flag = "~~~"
+    m.redraw()
+    pull_cci()
+    state.flag = "OK!"
+    m.redraw()
   end
 end
 
@@ -89,11 +96,15 @@ m.redraw = function()
   screen.move(72,8)
   screen.text("HECATOMB")
   screen.move(72,16)
-  screen.text("v" .. state.version_major .. "." .. state.version_minor .. "." .. state.version_patch)
+  screen.text("v" .. version)
   screen.move(72,24)
-  screen.text("CCI AUTO")
+  screen.text("CCI.AUTO.UP")
   screen.move(72,32)
-  screen.text("UPDATES ON")
+  screen.text(state.flag)
+  screen.move(72,48)
+  screen.text("K2: EXIT ")
+  screen.move(72,56)
+  screen.text("K3: UPDATE")
   screen.update()
 end
 
@@ -106,15 +117,3 @@ m.deinit = function()
 end
 
 mod.menu.register(mod.this_name, m)
-
-
-
--- API
-
-local api = {}
-
-api.get_state = function()
-  return state
-end
-
-return api
